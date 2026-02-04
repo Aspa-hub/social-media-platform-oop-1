@@ -1,41 +1,44 @@
 package socialmedia;
 
-public class User {
-    private int id;
-    private String username;
+import java.util.Objects;
+
+public class User extends Person {
+
     private String email;
 
-    public User(int id, String username, String email) {
-        this.id = id;
-        this.username = username;
+    public User(int id, String name, String email) {
+        super(id, name);
         this.email = email;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    @Override
+    public String getRole() {
+        return "User";
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void displayInfo() {
+        System.out.println(this);
     }
 
-    public void displayInfo() {
-        System.out.println("User: " + username + ", Email: " + email);
+    @Override
+    public String toString() {
+        return "User{id=" + id + ", name='" + name + "', email='" + email + "'}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return id == user.id && email.equals(user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email);
     }
 }

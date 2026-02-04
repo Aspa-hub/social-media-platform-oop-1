@@ -3,27 +3,26 @@ package socialmedia;
 public class Main {
     public static void main(String[] args) {
 
-        SocialMedia platform = new SocialMedia("MySocial");
+        User user1 = new User(1, "Alice", "alice@mail.com");
+        User user2 = new User(2, "Bob", "bob@mail.com");
 
-        User user1 = new User(1, "alice", "alice@mail.com");
-        User user2 = new User(2, "bob", "bob@mail.com");
+        Post p1 = new Post(1, "Hello world", user1);
+        Post p2 = new Post(2, "Java is cool", user1);
+        Post p3 = new Post(3, "OOP principles", user2);
 
-        Post post1 = new Post(1, "Hello world!", user1);
-        Post post2 = new Post(2, "My first post", user1);
+        SocialMedia sm = new SocialMedia();
+        sm.addPost(p1);
+        sm.addPost(p2);
+        sm.addPost(p3);
 
-        platform.displayPlatform();
+        System.out.println("Filtered by user:");
+        sm.filterByUser(user1).forEach(System.out::println);
 
-        user1.displayInfo();
-        user2.displayInfo();
+        System.out.println("\nSearch keyword 'Java':");
+        sm.searchByKeyword("Java").forEach(System.out::println);
 
-        post1.displayPost();
-        post2.displayPost();
-
-        if (user1.getId() == user2.getId()) {
-            System.out.println("Users are the same");
-        } else {
-            System.out.println("Users are different");
-        }
+        System.out.println("\nSorted posts:");
+        sm.sortByContent().forEach(System.out::println);
     }
 }
 
